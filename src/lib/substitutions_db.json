@@ -1,0 +1,92 @@
+[
+    {
+        "original": "Burro",
+        "substitutes": [
+            {
+                "name": "Olio extravergine di oliva",
+                "ratio": 0.8,
+                "note": "L'olio rende il dolce più umido ma meno soffice."
+            },
+            {
+                "name": "Margarina",
+                "ratio": 1.0,
+                "note": "Rapporto 1:1, gusto simile."
+            }
+        ]
+    },
+    {
+        "original": "Zucchero",
+        "substitutes": [
+            {
+                "name": "Miele",
+                "ratio": 0.75,
+                "note": "Riduci i liquidi della ricetta di 50ml ogni 100g di miele."
+            },
+            {
+                "name": "Eritritolo",
+                "ratio": 1.3,
+                "note": "Dolcificante a zero calorie, meno dolce dello zucchero."
+            }
+        ]
+    },
+    {
+        "original": "Latte",
+        "substitutes": [
+            {
+                "name": "Latte di Soia",
+                "ratio": 1.0,
+                "note": "Alternativa vegetale neutra."
+            },
+            {
+                "name": "Latte di Mandorla",
+                "ratio": 1.0,
+                "note": "Dà un leggero retrogusto di mandorla."
+            }
+        ]
+    },
+    {
+        "original": "Uovo",
+        "substitutes": [
+            {
+                "name": "Semi di lino (tritati + acqua)",
+                "ratio": 1.0,
+                "note": "1 uovo = 1 cucchiaio di semi di lino + 3 cucchiai di acqua."
+            },
+            {
+                "name": "Banana schiacciata",
+                "ratio": 0.5,
+                "note": "1 uovo = 1/2 banana media (ottimo per i dolci)."
+            }
+        ]
+    },
+    {
+        "original": "Farina",
+        "substitutes": [
+            {
+                "name": "Farina Integrale",
+                "ratio": 1.0,
+                "note": "Aggiungi 10-20ml di acqua in più poiché assorbe di più."
+            },
+            {
+                "name": "Farina di Riso",
+                "ratio": 1.0,
+                "note": "Senza glutine, consistenza più sabbiosa."
+            }
+        ]
+    },
+    {
+        "original": "Panna",
+        "substitutes": [
+            {
+                "name": "Yogurt greco",
+                "ratio": 1.0,
+                "note": "Più leggero e acidulo."
+            },
+            {
+                "name": "Latte di cocco (solido)",
+                "ratio": 1.0,
+                "note": "Ottimo per versioni vegane."
+            }
+        ]
+    }
+]

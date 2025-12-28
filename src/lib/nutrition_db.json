@@ -1,0 +1,219 @@
+[
+    {
+        "name": "Pasta (semola)",
+        "calories_per_100g": 350,
+        "carbs_per_100g": 72,
+        "proteins_per_100g": 13,
+        "fat_per_100g": 1.5
+    },
+    {
+        "name": "Riso Arborio",
+        "calories_per_100g": 360,
+        "carbs_per_100g": 80,
+        "proteins_per_100g": 7,
+        "fat_per_100g": 0.6
+    },
+    {
+        "name": "Pane comune",
+        "calories_per_100g": 265,
+        "carbs_per_100g": 49,
+        "proteins_per_100g": 9,
+        "fat_per_100g": 3.2
+    },
+    {
+        "name": "Olio extravergine di oliva",
+        "calories_per_100g": 884,
+        "carbs_per_100g": 0,
+        "proteins_per_100g": 0,
+        "fat_per_100g": 100
+    },
+    {
+        "name": "Burro",
+        "calories_per_100g": 717,
+        "carbs_per_100g": 0.1,
+        "proteins_per_100g": 0.9,
+        "fat_per_100g": 81
+    },
+    {
+        "name": "Uovo",
+        "calories_per_100g": 155,
+        "carbs_per_100g": 1.1,
+        "proteins_per_100g": 13,
+        "fat_per_100g": 11
+    },
+    {
+        "name": "Latte intero",
+        "calories_per_100g": 61,
+        "carbs_per_100g": 4.8,
+        "proteins_per_100g": 3.2,
+        "fat_per_100g": 3.3
+    },
+    {
+        "name": "Zucchero",
+        "calories_per_100g": 387,
+        "carbs_per_100g": 100,
+        "proteins_per_100g": 0,
+        "fat_per_100g": 0
+    },
+    {
+        "name": "Farina 00",
+        "calories_per_100g": 364,
+        "carbs_per_100g": 76,
+        "proteins_per_100g": 10,
+        "fat_per_100g": 1
+    },
+    {
+        "name": "Pomodori pelati",
+        "calories_per_100g": 21,
+        "carbs_per_100g": 3.9,
+        "proteins_per_100g": 1.2,
+        "fat_per_100g": 0.2
+    },
+    {
+        "name": "Petto di pollo",
+        "calories_per_100g": 165,
+        "carbs_per_100g": 0,
+        "proteins_per_100g": 31,
+        "fat_per_100g": 3.6
+    },
+    {
+        "name": "Macinato di manzo (magro)",
+        "calories_per_100g": 250,
+        "carbs_per_100g": 0,
+        "proteins_per_100g": 26,
+        "fat_per_100g": 15
+    },
+    {
+        "name": "Parmigiano Reggiano",
+        "calories_per_100g": 431,
+        "carbs_per_100g": 4.1,
+        "proteins_per_100g": 38,
+        "fat_per_100g": 29
+    },
+    {
+        "name": "Mozzarella",
+        "calories_per_100g": 280,
+        "carbs_per_100g": 2.2,
+        "proteins_per_100g": 22,
+        "fat_per_100g": 17
+    },
+    {
+        "name": "Salmone fresco",
+        "calories_per_100g": 208,
+        "carbs_per_100g": 0,
+        "proteins_per_100g": 20,
+        "fat_per_100g": 13
+    },
+    {
+        "name": "Patate",
+        "calories_per_100g": 77,
+        "carbs_per_100g": 17,
+        "proteins_per_100g": 2,
+        "fat_per_100g": 0.1
+    },
+    {
+        "name": "Cipolla",
+        "calories_per_100g": 40,
+        "carbs_per_100g": 9,
+        "proteins_per_100g": 1.1,
+        "fat_per_100g": 0.1
+    },
+    {
+        "name": "Aglio",
+        "calories_per_100g": 149,
+        "carbs_per_100g": 33,
+        "proteins_per_100g": 6.4,
+        "fat_per_100g": 0.5
+    },
+    {
+        "name": "Vino bianco",
+        "calories_per_100g": 82,
+        "carbs_per_100g": 2.6,
+        "proteins_per_100g": 0.1,
+        "fat_per_100g": 0
+    },
+    {
+        "name": "Panna da cucina",
+        "calories_per_100g": 196,
+        "carbs_per_100g": 3.7,
+        "proteins_per_100g": 3.1,
+        "fat_per_100g": 19
+    },
+    {
+        "name": "Tonno in scatola (sott'olio sgocciolato)",
+        "calories_per_100g": 190,
+        "carbs_per_100g": 0,
+        "proteins_per_100g": 25,
+        "fat_per_100g": 10
+    },
+    {
+        "name": "Sale",
+        "calories_per_100g": 0,
+        "carbs_per_100g": 0,
+        "proteins_per_100g": 0,
+        "fat_per_100g": 0
+    },
+    {
+        "name": "Pepe",
+        "calories_per_100g": 251,
+        "carbs_per_100g": 64,
+        "proteins_per_100g": 10,
+        "fat_per_100g": 3.3
+    },
+    {
+        "name": "Basilico freso",
+        "calories_per_100g": 23,
+        "carbs_per_100g": 2.7,
+        "proteins_per_100g": 3.2,
+        "fat_per_100g": 0.6
+    },
+    {
+        "name": "Fagioli borlotti (cotti)",
+        "calories_per_100g": 140,
+        "carbs_per_100g": 23,
+        "proteins_per_100g": 9,
+        "fat_per_100g": 0.8
+    },
+    {
+        "name": "Ceci (cotti)",
+        "calories_per_100g": 164,
+        "carbs_per_100g": 27,
+        "proteins_per_100g": 9,
+        "fat_per_100g": 2.6
+    },
+    {
+        "name": "Zucchine",
+        "calories_per_100g": 17,
+        "carbs_per_100g": 3.1,
+        "proteins_per_100g": 1.2,
+        "fat_per_100g": 0.3
+    },
+    {
+        "name": "Melanzane",
+        "calories_per_100g": 25,
+        "carbs_per_100g": 6,
+        "proteins_per_100g": 1,
+        "fat_per_100g": 0.2
+    },
+    {
+        "name": "Carote",
+        "calories_per_100g": 41,
+        "carbs_per_100g": 10,
+        "proteins_per_100g": 0.9,
+        "fat_per_100g": 0.2
+    },
+    {
+        "name": "Spinaci freschi",
+        "calories_per_100g": 23,
+        "carbs_per_100g": 3.6,
+        "proteins_per_100g": 2.9,
+        "fat_per_100g": 0.4
+    },
+    {
+        "name": "Lenticchie (cotte)",
+        "calories_per_100g": 116,
+        "carbs_per_100g": 20,
+        "proteins_per_100g": 9,
+        "fat_per_100g": 0.4
+    }
+]
