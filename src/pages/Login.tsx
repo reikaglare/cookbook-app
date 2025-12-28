@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { ChefHat, Mail, Lock, Loader2, AlertCircle } from 'lucide-react';
+import loginImg from '../assets/auth/login.png';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default function Login() {
             <div className="hidden md:flex flex-col justify-center items-center bg-orange-50 p-12 text-center">
                 <div className="max-w-md space-y-6">
                     <img
-                        src="/src/assets/auth/login.png"
+                        src={loginImg}
                         alt="Bentornato Chef"
                         className="rounded-3xl shadow-2xl mb-8 transform rotate-3 hover:rotate-0 transition-all duration-500"
                     />

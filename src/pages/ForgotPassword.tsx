@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { ChefHat, Mail, ArrowLeft, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import recoveryImg from '../assets/auth/recovery.png';
 
 export default function ForgotPassword() {
     const [loading, setLoading] = useState(false);
@@ -35,7 +36,7 @@ export default function ForgotPassword() {
             <div className="hidden md:flex flex-col justify-center items-center bg-orange-50 p-12 text-center">
                 <div className="max-w-md space-y-6">
                     <img
-                        src="/src/assets/auth/recovery.png"
+                        src={recoveryImg}
                         alt="Recupero account"
                         className="rounded-3xl shadow-2xl mb-8 transform -rotate-1 hover:rotate-0 transition-all duration-500"
                     />

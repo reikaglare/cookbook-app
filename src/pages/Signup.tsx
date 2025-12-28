@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { ChefHat, Mail, Lock, User, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
+import signupImg from '../assets/auth/signup.png';
 
 export default function Signup() {
     const [loading, setLoading] = useState(false);
@@ -84,7 +85,7 @@ export default function Signup() {
             <div className="hidden md:flex flex-col justify-center items-center bg-orange-50 p-12 text-center">
                 <div className="max-w-md space-y-6">
                     <img
-                        src="/src/assets/auth/signup.png"
+                        src={signupImg}
                         alt="Unisciti a CookBook"
                         className="rounded-3xl shadow-2xl mb-8 transform -rotate-2 hover:rotate-0 transition-all duration-500"
                     />
