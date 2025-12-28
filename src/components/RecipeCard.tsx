@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Clock, Users, ChefHat, Heart } from 'lucide-react';
+import { Clock, Users, Heart } from 'lucide-react';
 
 interface RecipeCardProps {
     recipe: any;
