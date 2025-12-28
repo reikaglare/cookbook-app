@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { ChefHat, Lock, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
+import recoveryImg from '../assets/auth/recovery.png';
 
 export default function ResetPassword() {
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ export default function ResetPassword() {
             <div className="hidden md:flex flex-col justify-center items-center bg-orange-50 p-12 text-center">
                 <div className="max-w-md space-y-6">
                     <img
-                        src="/src/assets/auth/recovery.png"
+                        src={recoveryImg}
                         alt="Nuova Password"
                         className="rounded-3xl shadow-2xl mb-8 transform rotate-1 hover:rotate-0 transition-all duration-500"
                     />
