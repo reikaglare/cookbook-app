@@ -175,10 +175,19 @@ export default function ShoppingList() {
                     <button
                         type="submit"
                         disabled={adding || !newItem.item}
-                        className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors font-medium flex items-center justify-center disabled:opacity-50"
+                        className="bg-primary text-white px-6 py-3 rounded-xl hover:bg-primary/90 transition-all font-bold flex items-center justify-center disabled:opacity-50 shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-95"
                     >
-                        {adding ? <Loader2 className="animate-spin w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                        {adding ? (
+                            <Loader2 className="animate-spin w-6 h-6" />
+                        ) : (
+                            <>
+                                <Plus className="w-6 h-6 sm:mr-2" strokeWidth={3} />
+                                <span className="hidden sm:inline">Aggiungi</span>
+                                <span className="sm:hidden">Aggiungi alla lista</span>
+                            </>
+                        )}
                     </button>
+
                 </div>
             </form>
 
