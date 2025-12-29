@@ -5,20 +5,23 @@ export default function Landing() {
     return (
         <div className="min-h-screen bg-background">
             {/* Navigation */}
-            <nav className="container mx-auto px-6 py-6 flex justify-between items-center">
-                <div className="flex items-center space-x-2">
+            <nav className="container mx-auto px-4 sm:px-6 py-6 flex justify-between items-center">
+                <div className="flex items-center space-x-2 shrink-0">
                     <ChefHat className="w-8 h-8 text-primary" />
-                    <span className="text-2xl font-bold font-sans text-[var(--text-primary)]">CookBook</span>
+                    <span className="text-xl sm:text-2xl font-bold font-sans text-[var(--text-primary)]">CookBook</span>
                 </div>
-                <div className="space-x-4">
-                    <Link to="/login" className="text-[var(--text-secondary)] hover:text-primary transition-colors font-medium">
+                <div className="flex items-center space-x-2 sm:space-x-4">
+                    <Link to="/login" className="text-sm sm:text-base text-[var(--text-secondary)] hover:text-primary transition-colors font-medium">
                         Accedi
                     </Link>
-                    <Link to="/signup" className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-full font-medium transition-colors">
-                        Registrati Gratis
+                    <Link to="/signup" className="bg-primary hover:bg-primary/90 text-white px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base font-medium transition-colors whitespace-nowrap">
+                        <span className="hidden xs:inline">Registrati</span>
+                        <span className="xs:hidden">Unisciti</span>
+                        <span className="hidden sm:inline"> Gratis</span>
                     </Link>
                 </div>
             </nav>
+
 
             {/* Hero Section */}
             <div className="container mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
