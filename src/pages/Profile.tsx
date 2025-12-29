@@ -163,9 +163,59 @@ export default function Profile() {
 
             <div className="bg-[var(--bg-surface)] p-8 rounded-xl shadow-sm border border-gray-100">
                 <h2 className="text-lg font-bold text-[var(--text-primary)] mb-4">Sicurezza</h2>
-                <button disabled className="text-gray-400 border border-[var(--border-color)] px-4 py-2 rounded-lg cursor-not-allowed w-full text-left">
-                    Cambia Password (Coming Soon)
-                </button>
+                <form onSubmit={async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.currentTarget);
+                    const newPassword = formData.get('newPassword') as string;
+                    const confirmPassword = formData.get('confirmPassword') as string;
+
+                    if (newPassword.length < 6) {
+                        toast.error('La password deve avere almeno 6 caratteri');
+                        return;
+                    }
+
+                    if (newPassword !== confirmPassword) {
+                        toast.error('Le password non coincidono');
+                        return;
+                    }
+
+                    const toastId = toast.loading('Aggiornamento password...');
+                    try {
+                        const { error } = await supabase.auth.updateUser({ password: newPassword });
+                        if (error) throw error;
+                        toast.success('Password aggiornata con successo!', { id: toastId });
+                        (e.target as HTMLFormElement).reset();
+                    } catch (error: any) {
+                        toast.error('Errore: ' + error.message, { id: toastId });
+                    }
+                }} className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">Nuova Password</label>
+                        <input
+                            name="newPassword"
+                            type="password"
+                            required
+                            placeholder="Minimo 6 caratteri"
+                            className="w-full px-4 py-2 rounded-lg border border-[var(--border-color)] focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">Conferma Nuova Password</label>
+                        <input
+                            name="confirmPassword"
+                            type="password"
+                            required
+                            placeholder="Ripeti la password"
+                            className="w-full px-4 py-2 rounded-lg border border-[var(--border-color)] focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-white text-gray-700 border border-[var(--border-color)] px-4 py-2 rounded-lg hover:bg-gray-50 transition-all font-medium"
+                    >
+                        Aggiorna Password
+                    </button>
+                </form>
             </div>
         </div>
     );
