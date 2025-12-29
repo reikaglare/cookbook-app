@@ -80,48 +80,68 @@ export default function ResetPassword() {
                             <div className="bg-green-50 text-green-700 p-6 rounded-2xl flex flex-col items-center animate-bounce">
                                 <CheckCircle className="w-12 h-12 mb-3" />
                                 <p className="font-bold text-lg">Password Aggiornata!</p>
-                                <p className="text-sm">Reindirizzamento alla dashboard...</p>
+                                <p className="text-sm">La tua password è stata resettata con successo. Tra pochi istanti verrai reindirizzato alla Dashboard.</p>
                             </div>
+                            <button
+                                onClick={() => navigate('/dashboard')}
+                                className="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-primary/90 transition-all shadow-lg"
+                            >
+                                Vai alla Dashboard ora
+                            </button>
                         </div>
                     ) : (
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            {error && (
-                                <div className="bg-red-50 text-red-600 p-4 rounded-lg flex items-center text-sm animate-shake">
-                                    <AlertCircle className="w-5 h-5 mr-2 flex-shrink-0" />
-                                    {error}
-                                </div>
-                            )}
-
-                            <div>
-                                <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">Nuova Password</label>
-                                <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                                    <input
-                                        type="password"
-                                        required
-                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-[var(--border-color)] focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
-                                        placeholder="Minimo 6 caratteri"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg transition-all transform hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
-                            >
-                                {loading ? (
-                                    <>
-                                        <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                                        Aggiornamento...
-                                    </>
-                                ) : (
-                                    'Aggiorna Password'
+                        <div className="space-y-6">
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                {error && (
+                                    <div className="bg-red-50 text-red-600 p-4 rounded-lg flex items-center text-sm animate-shake">
+                                        <AlertCircle className="w-5 h-5 mr-2 flex-shrink-0" />
+                                        {error}
+                                    </div>
                                 )}
-                            </button>
-                        </form>
+
+                                <div>
+                                    <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">Nuova Password</label>
+                                    <div className="relative">
+                                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                        <input
+                                            type="password"
+                                            required
+                                            className="w-full pl-10 pr-4 py-3 rounded-lg border border-[var(--border-color)] focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                                            placeholder="Minimo 6 caratteri"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg transition-all transform hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+                                >
+                                    {loading ? (
+                                        <>
+                                            <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                                            Aggiornamento...
+                                        </>
+                                    ) : (
+                                        'Aggiorna Password'
+                                    )}
+                                </button>
+                            </form>
+
+                            <div className="text-center pt-4 border-t border-[var(--border-color)]">
+                                <p className="text-sm text-[var(--text-secondary)] mb-4">
+                                    Il link non funziona o è scaduto?
+                                </p>
+                                <button
+                                    onClick={() => navigate('/login')}
+                                    className="text-primary font-medium hover:underline"
+                                >
+                                    Torna al Login
+                                </button>
+                            </div>
+                        </div>
                     )}
                 </div>
             </div>
