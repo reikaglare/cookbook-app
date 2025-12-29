@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Clock, Users, Heart } from 'lucide-react';
+import CategoryIcon from './CategoryIcon';
 
 interface RecipeCardProps {
     recipe: any;
@@ -50,7 +51,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
 
                 {recipe.categories && (
                     <div className="mt-auto pt-3 border-t border-gray-50 flex items-center text-xs text-gray-500">
-                        <span className="mr-1">{recipe.categories.icon}</span>
+                        <CategoryIcon name={recipe.categories.name} className="w-4 h-4 mr-1.5 text-primary" />
                         {recipe.categories.name}
                     </div>
                 )}

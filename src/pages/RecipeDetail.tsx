@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Clock, Users, ArrowLeft, Edit2, Trash2, Heart, Share2, ChefHat, Loader2, Calculator, ShoppingBag, RefreshCw } from 'lucide-react';
 import ShareModal from '../components/ShareModal';
+import CategoryIcon from '../components/CategoryIcon';
 import toast from 'react-hot-toast';
 import { getSubstitutes, calculateNutrition, type SubstitutionGroup, type Substitute, type NutritionData } from '../lib/nutrition';
 
@@ -145,8 +146,9 @@ export default function RecipeDetail() {
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
                     <div className="flex items-center space-x-2 mb-2 text-primary-100">
-                        <span className="bg-primary/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium">
-                            {recipe.categories?.icon} {recipe.categories?.name}
+                        <span className="flex items-center bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                            <CategoryIcon name={recipe.categories.name} className="w-4 h-4 mr-1.5" />
+                            {recipe.categories.name}
                         </span>
                         <span className={`px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm
                ${recipe.difficulty === 'Easy' ? 'bg-green-500/80' :
