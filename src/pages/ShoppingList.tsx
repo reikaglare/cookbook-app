@@ -13,6 +13,19 @@ import {
 import toast from 'react-hot-toast';
 import clsx from 'clsx';
 
+const UNIT_OPTIONS = [
+    { value: 'g', label: 'Grammi (g)' },
+    { value: 'kg', label: 'Kilogrammi (kg)' },
+    { value: 'ml', label: 'Millilitri (ml)' },
+    { value: 'l', label: 'Litri (l)' },
+    { value: 'cucchiaio', label: 'Cucchiaio' },
+    { value: 'cucchiaino', label: 'Cucchiaino' },
+    { value: 'uovo', label: 'Uovo/a' },
+    { value: 'pizzico', label: 'Pizzico' },
+    { value: 'qb', label: 'Quanto basta (q.b.)' },
+    { value: 'pezzo', label: 'Pezzo' },
+];
+
 interface ShoppingItem {
     id: string;
     item: string;
@@ -173,13 +186,16 @@ export default function ShoppingList() {
                         </div>
                         <div className="space-y-2">
                             <label className="text-sm font-semibold text-[var(--text-secondary)] ml-1">Unità</label>
-                            <input
-                                type="text"
-                                placeholder="Es: pz, kg..."
+                            <select
                                 className="w-full px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-main)] focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                                 value={newItem.unit}
                                 onChange={(e) => setNewItem({ ...newItem, unit: e.target.value })}
-                            />
+                            >
+                                <option value="">Seleziona</option>
+                                {UNIT_OPTIONS.map(opt => (
+                                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                     <div className="flex flex-col justify-end">

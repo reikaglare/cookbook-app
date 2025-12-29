@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { supabase } from '../lib/supabase';
 import {
     ChefHat,
     Home,
@@ -16,7 +17,9 @@ import {
     Plus,
     Moon,
     Sun,
-    ShoppingBag
+    ShoppingBag,
+    Clock,
+    Layers
 } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -25,6 +28,11 @@ export default function AppLayout() {
     const { theme, toggleTheme } = useTheme();
     const location = useLocation();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    // Notification State
+    const [notifications, setNotifications] = useState<any[]>([]);
+    const [showNotifications, setShowNotifications] = useState(false);
+    const [unreadCount, setUnreadCount] = useState(0);
 
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', icon: Home },
@@ -37,6 +45,82 @@ export default function AppLayout() {
     const handleSignOut = async () => {
         await signOut();
     };
+
+    // Smart Notifications Logic
+    useEffect(() => {
+        const checkNotifications = async () => {
+            if (!user) return;
+
+            const newNotifications: any[] = [];
+
+            // 1. Check Shopping List
+            const { data: listItems } = await supabase
+                .from('shopping_list')
+                .select('*')
+                .eq('user_id', user.id)
+                .eq('is_bought', false);
+
+            if (listItems && listItems.length > 0) {
+                // General Reminder
+                newNotifications.push({
+                    id: 'shop-count',
+                    title: 'Lista della Spesa',
+                    message: `Hai ${listItems.length} prodotti da comprare.`,
+                    type: 'info',
+                    icon: ShoppingBag,
+                    link: '/shopping-list'
+                });
+
+                // Stale Items (Older than 3 days)
+                const threeDaysAgo = new Date();
+                threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+
+                const hasStaleItems = listItems.some(item => new Date(item.created_at) < threeDaysAgo);
+                if (hasStaleItems) {
+                    newNotifications.push({
+                        id: 'shop-stale',
+                        title: 'Dimenticato la spesa?',
+                        message: 'Hai articoli nella lista da più di 3 giorni.',
+                        type: 'warning',
+                        icon: Clock,
+                        link: '/shopping-list'
+                    });
+                }
+
+                // Smart Aggregation (Duplicates)
+                const grouped: Record<string, { count: number, totalQty: number, unit: string }> = {};
+
+                listItems.forEach(item => {
+                    const name = item.item.toLowerCase().trim();
+                    if (!grouped[name]) {
+                        grouped[name] = { count: 0, totalQty: 0, unit: item.unit || '' };
+                    }
+                    grouped[name].count++;
+                    const qty = parseFloat(item.quantity) || 0;
+                    grouped[name].totalQty += qty;
+                });
+
+                Object.entries(grouped).forEach(([name, data]) => {
+                    if (data.count > 1) {
+                        newNotifications.push({
+                            id: `dup-${name}`,
+                            title: 'Articoli Multipli',
+                            message: `Hai "${name}" inserito ${data.count} volte. Totale stimato: ${data.totalQty} ${data.unit}.`,
+                            type: 'info',
+                            icon: Layers,
+                            link: '/shopping-list'
+                        });
+                    }
+                });
+            }
+
+            setNotifications(newNotifications);
+            setUnreadCount(newNotifications.length);
+        };
+
+        checkNotifications();
+        // Poll every minute or trigger on route change could be added here
+    }, [user, location.pathname]); // Re-check when changing pages (e.g. after adding to list)
 
     return (
         <div className="min-h-screen bg-[var(--bg-main)] flex flex-col md:flex-row">
@@ -158,7 +242,7 @@ export default function AppLayout() {
                             className="w-full pl-10 pr-4 py-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-surface)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
                         />
                     </div>
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4 relative">
                         <button
                             onClick={toggleTheme}
                             className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors rounded-lg hover:bg-[var(--bg-hover)]"
@@ -166,10 +250,61 @@ export default function AppLayout() {
                         >
                             {theme === 'dark' ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
                         </button>
-                        <button className="relative p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
-                            <Bell className="w-6 h-6" />
-                            <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-[var(--bg-surface)]"></span>
-                        </button>
+
+                        {/* Notification Bell */}
+                        <div className="relative">
+                            <button
+                                onClick={() => setShowNotifications(!showNotifications)}
+                                className="relative p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors rounded-lg hover:bg-[var(--bg-hover)]"
+                            >
+                                <Bell className="w-6 h-6" />
+                                {unreadCount > 0 && (
+                                    <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-[var(--bg-surface)] animate-pulse"></span>
+                                )}
+                            </button>
+
+                            {/* Notification Dropdown */}
+                            {showNotifications && (
+                                <div className="absolute right-0 top-full mt-2 w-80 bg-[var(--bg-surface)] rounded-2xl shadow-xl border border-[var(--border-color)] overflow-hidden z-50">
+                                    <div className="p-4 border-b border-[var(--border-color)] flex justify-between items-center">
+                                        <h3 className="font-bold text-[var(--text-primary)]">Notifiche</h3>
+                                        <span className="text-xs text-[var(--text-secondary)]">{unreadCount} nuove</span>
+                                    </div>
+                                    <div className="max-h-96 overflow-y-auto">
+                                        {notifications.length > 0 ? (
+                                            <div className="divide-y divide-[var(--border-color)]">
+                                                {notifications.map((notif) => (
+                                                    <Link
+                                                        key={notif.id}
+                                                        to={notif.link || '#'}
+                                                        onClick={() => setShowNotifications(false)}
+                                                        className="block p-4 hover:bg-[var(--bg-main)] transition-colors"
+                                                    >
+                                                        <div className="flex items-start space-x-3">
+                                                            <div className={clsx(
+                                                                "p-2 rounded-full",
+                                                                notif.type === 'warning' ? "bg-orange-100 text-orange-600" : "bg-blue-50 text-blue-500"
+                                                            )}>
+                                                                <notif.icon className="w-4 h-4" />
+                                                            </div>
+                                                            <div>
+                                                                <p className="text-sm font-semibold text-[var(--text-primary)]">{notif.title}</p>
+                                                                <p className="text-xs text-[var(--text-secondary)] mt-1 leading-relaxed">{notif.message}</p>
+                                                            </div>
+                                                        </div>
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <div className="p-8 text-center text-[var(--text-secondary)]">
+                                                <Bell className="w-8 h-8 mx-auto mb-2 opacity-20" />
+                                                <p className="text-sm">Nessuna nuova notifica</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </header>
 
