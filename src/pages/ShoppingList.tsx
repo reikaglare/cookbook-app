@@ -162,7 +162,7 @@ export default function ShoppingList() {
 
             {/* Add Section */}
             <form onSubmit={addItem} className="bg-[var(--bg-surface)] p-6 rounded-2xl shadow-sm border border-[var(--border-color)]">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                     <div className="md:col-span-2 space-y-2">
                         <label className="text-sm font-semibold text-[var(--text-secondary)] ml-1">Prodotto</label>
                         <input
@@ -173,7 +173,7 @@ export default function ShoppingList() {
                             onChange={(e) => setNewItem({ ...newItem, item: e.target.value })}
                         />
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="md:col-span-2 grid grid-cols-2 gap-3">
                         <div className="space-y-2">
                             <label className="text-sm font-semibold text-[var(--text-secondary)] ml-1">Qtà</label>
                             <input
@@ -191,7 +191,7 @@ export default function ShoppingList() {
                                 value={newItem.unit}
                                 onChange={(e) => setNewItem({ ...newItem, unit: e.target.value })}
                             >
-                                <option value="">Seleziona</option>
+                                <option value="">Unità</option>
                                 {UNIT_OPTIONS.map(opt => (
                                     <option key={opt.value} value={opt.value}>{opt.label}</option>
                                 ))}
