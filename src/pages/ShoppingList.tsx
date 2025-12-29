@@ -187,7 +187,7 @@ export default function ShoppingList() {
                         <div className="space-y-2">
                             <label className="text-sm font-semibold text-[var(--text-secondary)] ml-1">Unità</label>
                             <select
-                                className="w-full px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-main)] focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                className="w-full px-2 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-main)] focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                                 value={newItem.unit}
                                 onChange={(e) => setNewItem({ ...newItem, unit: e.target.value })}
                             >
