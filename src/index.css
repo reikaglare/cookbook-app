@@ -4,7 +4,9 @@
   --color-primary: #F97316;
   --color-secondary: #EF4444;
   --color-accent: #FCD34D;
+  --breakpoint-xs: 380px;
 }
+
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
