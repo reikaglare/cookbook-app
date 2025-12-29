@@ -53,7 +53,11 @@ export default function ShoppingList() {
 
     const addItem = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!newItem.item || !user) return;
+        if (!newItem.item) {
+            toast.error('Inserisci il nome del prodotto');
+            return;
+        }
+        if (!user) return;
 
         setAdding(true);
         try {
@@ -145,51 +149,59 @@ export default function ShoppingList() {
 
             {/* Add Section */}
             <form onSubmit={addItem} className="bg-[var(--bg-surface)] p-6 rounded-2xl shadow-sm border border-[var(--border-color)]">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div className="md:col-span-2">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div className="md:col-span-2 space-y-2">
+                        <label className="text-sm font-semibold text-[var(--text-secondary)] ml-1">Prodotto</label>
                         <input
                             type="text"
-                            placeholder="Cosa ti serve?"
-                            className="w-full px-4 py-2 rounded-lg border border-[var(--border-color)] focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+                            placeholder="Es: Uova, Latte, Pane..."
+                            className="w-full px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-main)] focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                             value={newItem.item}
                             onChange={(e) => setNewItem({ ...newItem, item: e.target.value })}
-                            required
                         />
                     </div>
-                    <div className="flex gap-2">
-                        <input
-                            type="text"
-                            placeholder="Qty"
-                            className="w-16 px-4 py-2 rounded-lg border border-[var(--border-color)] focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
-                            value={newItem.quantity}
-                            onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Unità"
-                            className="flex-1 px-4 py-2 rounded-lg border border-[var(--border-color)] focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
-                            value={newItem.unit}
-                            onChange={(e) => setNewItem({ ...newItem, unit: e.target.value })}
-                        />
+                    <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-2">
+                            <label className="text-sm font-semibold text-[var(--text-secondary)] ml-1">Qtà</label>
+                            <input
+                                type="text"
+                                placeholder="Es: 4"
+                                className="w-full px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-main)] focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                value={newItem.quantity}
+                                onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-semibold text-[var(--text-secondary)] ml-1">Unità</label>
+                            <input
+                                type="text"
+                                placeholder="Es: pz, kg..."
+                                className="w-full px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-main)] focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                value={newItem.unit}
+                                onChange={(e) => setNewItem({ ...newItem, unit: e.target.value })}
+                            />
+                        </div>
                     </div>
-                    <button
-                        type="submit"
-                        disabled={adding || !newItem.item}
-                        className="bg-primary text-white px-6 py-3 rounded-xl hover:bg-primary/90 transition-all font-bold flex items-center justify-center disabled:opacity-50 shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-95"
-                    >
-                        {adding ? (
-                            <Loader2 className="animate-spin w-6 h-6" />
-                        ) : (
-                            <>
-                                <Plus className="w-6 h-6 sm:mr-2" strokeWidth={3} />
-                                <span className="hidden sm:inline">Aggiungi</span>
-                                <span className="sm:hidden">Aggiungi alla lista</span>
-                            </>
-                        )}
-                    </button>
-
+                    <div className="flex flex-col justify-end">
+                        <button
+                            type="submit"
+                            disabled={adding}
+                            className="w-full bg-primary text-white px-6 py-3 rounded-xl hover:bg-primary/90 transition-all font-bold flex items-center justify-center disabled:opacity-50 shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-95"
+                        >
+                            {adding ? (
+                                <Loader2 className="animate-spin w-6 h-6" />
+                            ) : (
+                                <>
+                                    <Plus className="w-6 h-6 sm:mr-2" strokeWidth={3} />
+                                    <span className="hidden sm:inline">Aggiungi</span>
+                                    <span className="sm:hidden">Aggiungi alla lista</span>
+                                </>
+                            )}
+                        </button>
+                    </div>
                 </div>
             </form>
+
 
             {/* List */}
             <div className="space-y-3">
