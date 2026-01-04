@@ -8,7 +8,8 @@ import {
     Pizza,
     Fish,
     Sandwich,
-    Croissant
+    Croissant,
+    Soup
 } from 'lucide-react';
 
 interface CategoryIconProps {
@@ -33,6 +34,7 @@ export default function CategoryIcon({ name, className = "w-5 h-5", showDefault 
     if (normalized.includes('pizza') || normalized.includes('focaccia')) return <Pizza className={className} />;
     if (normalized.includes('panin') || normalized.includes('burger')) return <Sandwich className={className} />;
     if (normalized.includes('colazion') || normalized.includes('brioche')) return <Croissant className={className} />;
+    if (normalized.includes('salse') || normalized.includes('sughi') || normalized.includes('condimenti')) return <Soup className={className} />;
 
     // Fallback: if we can't map it, show a generic icon if requested
     if (showDefault) {
