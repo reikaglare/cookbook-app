@@ -55,6 +55,7 @@ export default function AddRecipe() {
                 if (data) {
                     setRecipe({
                         ...data,
+                        variants_and_tips: data.variants_and_tips || '',
                         ingredients: Array.isArray(data.ingredients) ? data.ingredients : [{ item: '', quantity: '', unit: '' }],
                         instructions: Array.isArray(data.instructions) ? data.instructions : [''],
                     });
