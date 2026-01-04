@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase';
 import { Plus, Search, Filter, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import RecipeCard from '../components/RecipeCard';
+import CategorySelect from '../components/CategorySelect';
 
 export default function MyRecipes() {
     const { user } = useAuth();
@@ -75,16 +76,12 @@ export default function MyRecipes() {
                 </div>
                 <div className="flex items-center space-x-2 min-w-[200px]">
                     <Filter className="text-gray-400 w-5 h-5" />
-                    <select
-                        className="w-full p-2 rounded-lg border border-[var(--border-color)] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary bg-[var(--bg-surface)]"
+                    <CategorySelect
                         value={categoryFilter}
-                        onChange={(e) => setCategoryFilter(e.target.value)}
-                    >
-                        <option value="all">Tutte le categorie</option>
-                        {categories.map(cat => (
-                            <option key={cat.id} value={cat.id}>{cat.icon} {cat.name}</option>
-                        ))}
-                    </select>
+                        onChange={(value) => setCategoryFilter(value)}
+                        categories={[{ id: 'all', name: 'Tutte le categorie' }, ...categories]}
+                        className="w-full"
+                    />
                 </div>
             </div>
 

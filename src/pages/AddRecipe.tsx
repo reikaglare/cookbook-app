@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Loader2, Plus, Trash2, Save, ArrowLeft, Image as ImageIcon, Calculator } from 'lucide-react';
 import toast from 'react-hot-toast';
+import CategorySelect from '../components/CategorySelect';
 import type { NutritionData } from '../lib/nutrition';
 import { calculateNutrition } from '../lib/nutrition';
 
@@ -305,17 +306,13 @@ export default function AddRecipe() {
 
                         <div>
                             <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">Categoria</label>
-                            <select
-                                className="w-full px-4 py-2 rounded-lg border border-[var(--border-color)] focus:ring-2 focus:ring-primary focus:border-transparent transition-all bg-[var(--bg-surface)]"
+                            <CategorySelect
                                 value={recipe.category_id}
-                                onChange={(e) => setRecipe({ ...recipe, category_id: e.target.value })}
+                                onChange={(value) => setRecipe({ ...recipe, category_id: value })}
+                                categories={categories}
+                                placeholder="Seleziona Categoria"
                                 required
-                            >
-                                <option value="">Seleziona Categoria</option>
-                                {categories.map((cat) => (
-                                    <option key={cat.id} value={cat.id}>{cat.icon} {cat.name}</option>
-                                ))}
-                            </select>
+                            />
                         </div>
 
                         <div>
