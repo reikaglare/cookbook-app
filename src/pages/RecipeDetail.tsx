@@ -179,7 +179,7 @@ export default function RecipeDetail() {
             <div className="grid md:grid-cols-3 gap-8 px-2 md:px-0">
                 {/* Ingredients Column */}
                 <div className="md:col-span-1 space-y-6">
-                    <div className="bg-[var(--bg-surface)] p-6 rounded-xl shadow-sm border border-gray-100 sticky top-24">
+                    <div className="bg-[var(--bg-surface)] p-6 rounded-xl shadow-sm border border-gray-100">
                         <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4 flex items-center">
                             <div className="bg-green-100 p-2 rounded-lg mr-2 text-green-600">
                                 <ChefHat className="w-5 h-5" />
@@ -193,7 +193,7 @@ export default function RecipeDetail() {
                             <ShoppingBag className="w-4 h-4" />
                             <span>Aggiungi alla lista spesa</span>
                         </button>
-                        <ul className="space-y-3">
+                        <ul className="space-y-3 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
                             {recipe.ingredients?.map((ing: any, i: number) => {
                                 const subGroup = getSubstitutes(ing.item);
                                 const currentSub = substitutions[i];
@@ -232,7 +232,7 @@ export default function RecipeDetail() {
                     </div>
 
                     {recipe.nutrition && (
-                        <div className="bg-[var(--bg-surface)] p-6 rounded-xl shadow-sm border border-gray-100 sticky top-[28rem]">
+                        <div className="bg-[var(--bg-surface)] p-6 rounded-xl shadow-sm border border-gray-100">
                             <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4 flex items-center">
                                 <div className="bg-orange-100 p-2 rounded-lg mr-2 text-orange-600">
                                     <Calculator className="w-5 h-5" />
