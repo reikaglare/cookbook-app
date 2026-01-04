@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Clock, Users, ArrowLeft, Edit2, Trash2, Heart, Share2, ChefHat, Loader2, Calculator, ShoppingBag, RefreshCw, Lightbulb } from 'lucide-react';
+import { Clock, Users, ArrowLeft, Edit2, Trash2, Heart, Share2, ChefHat, Loader2, Calculator, ShoppingBag, RefreshCw, Lightbulb, Minus, Plus } from 'lucide-react';
 import ShareModal from '../components/ShareModal';
 import CategoryIcon from '../components/CategoryIcon';
 import toast from 'react-hot-toast';
@@ -18,6 +18,7 @@ export default function RecipeDetail() {
     const [substitutions, setSubstitutions] = useState<Record<number, Substitute>>({});
     const [currentNutrition, setCurrentNutrition] = useState<NutritionData | null>(null);
     const [showSubModal, setShowSubModal] = useState<{ index: number, group: SubstitutionGroup } | null>(null);
+    const [displayServings, setDisplayServings] = useState<number>(0);
 
     useEffect(() => {
         async function fetchRecipe() {
@@ -33,6 +34,7 @@ export default function RecipeDetail() {
 
                 if (error) throw error;
                 setRecipe(data);
+                setDisplayServings(data.servings);
             } catch (error) {
                 console.error('Error fetching recipe:', error);
                 navigate('/my-recipes'); // Redirect if not found/unauthorized
@@ -44,32 +46,31 @@ export default function RecipeDetail() {
     }, [id, user, navigate]);
 
     useEffect(() => {
-        if (!recipe) return;
+        if (!recipe || displayServings === 0) return;
 
         const updateNutrition = async () => {
+            const multiplier = displayServings / recipe.servings;
             const modifiedIngredients = recipe.ingredients.map((ing: any, index: number) => {
                 const sub = substitutions[index];
+                const originalQty = parseFloat(ing.quantity);
+                const scaledQty = isNaN(originalQty) ? ing.quantity : (originalQty * multiplier).toString();
+
                 if (sub) {
-                    const qty = parseFloat(ing.quantity);
                     return {
                         ...ing,
                         item: sub.name,
-                        quantity: isNaN(qty) ? ing.quantity : (qty * sub.ratio).toString()
+                        quantity: isNaN(originalQty) ? ing.quantity : (originalQty * multiplier * sub.ratio).toString()
                     };
                 }
-                return ing;
+                return { ...ing, quantity: scaledQty };
             });
 
             const newData = await calculateNutrition(recipe.title, modifiedIngredients);
             setCurrentNutrition(newData);
         };
 
-        if (Object.keys(substitutions).length > 0) {
-            updateNutrition();
-        } else {
-            setCurrentNutrition(recipe.nutrition);
-        }
-    }, [recipe, substitutions]);
+        updateNutrition();
+    }, [recipe, substitutions, displayServings]);
 
     const handleDelete = async () => {
         if (confirm('Sei sicuro di voler eliminare questa ricetta?')) {
@@ -168,9 +169,24 @@ export default function RecipeDetail() {
                             <Clock className="w-5 h-5 mr-2" />
                             <span>Cottura: {recipe.cook_time}m</span>
                         </div>
-                        <div className="flex items-center">
-                            <Users className="w-5 h-5 mr-2" />
-                            <span>{recipe.servings} Porzioni</span>
+                        <div className="flex items-center bg-white/20 backdrop-blur-md rounded-lg px-3 py-1 border border-white/30">
+                            <Users className="w-5 h-5 mr-3" />
+                            <div className="flex items-center space-x-3">
+                                <button
+                                    onClick={() => setDisplayServings(Math.max(1, displayServings - 1))}
+                                    className="hover:text-primary transition-colors p-1"
+                                >
+                                    <Minus className="w-4 h-4" />
+                                </button>
+                                <span className="font-bold min-w-[1.5rem] text-center">{displayServings}</span>
+                                <button
+                                    onClick={() => setDisplayServings(displayServings + 1)}
+                                    className="hover:text-primary transition-colors p-1"
+                                >
+                                    <Plus className="w-4 h-4" />
+                                </button>
+                                <span className="text-xs ml-1 uppercase tracking-wider opacity-80">Porzioni</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -197,7 +213,13 @@ export default function RecipeDetail() {
                             {recipe.ingredients?.map((ing: any, i: number) => {
                                 const subGroup = getSubstitutes(ing.item);
                                 const currentSub = substitutions[i];
-                                const displayQty = currentSub ? (parseFloat(ing.quantity) * currentSub.ratio).toFixed(1).replace(/\.0$/, '') : ing.quantity;
+                                const multiplier = displayServings / recipe.servings;
+                                const originalQty = parseFloat(ing.quantity);
+
+                                const scaledQty = isNaN(originalQty)
+                                    ? ing.quantity
+                                    : (originalQty * multiplier * (currentSub ? currentSub.ratio : 1)).toFixed(1).replace(/\.0$/, '');
+
                                 const displayItem = currentSub ? currentSub.name : ing.item;
 
                                 return (
@@ -206,7 +228,7 @@ export default function RecipeDetail() {
                                             <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />
                                             <div className="flex-1">
                                                 <span className="text-[var(--text-primary)]">
-                                                    <span className="font-bold text-[var(--text-primary)]">{displayQty} {ing.unit}</span> {displayItem}
+                                                    <span className="font-bold text-[var(--text-primary)]">{scaledQty} {ing.unit}</span> {displayItem}
                                                 </span>
                                                 {currentSub && (
                                                     <p className="text-[11px] text-orange-600 font-medium mt-1 flex items-center">
