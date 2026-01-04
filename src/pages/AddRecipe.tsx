@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Loader2, Plus, Trash2, Save, ArrowLeft, Image as ImageIcon, Calculator } from 'lucide-react';
+import { Loader2, Plus, Trash2, Save, ArrowLeft, Image as ImageIcon, Calculator, Upload } from 'lucide-react';
 import toast from 'react-hot-toast';
 import CategorySelect from '../components/CategorySelect';
 import type { NutritionData } from '../lib/nutrition';
@@ -243,7 +243,7 @@ export default function AddRecipe() {
                                                 className="hidden"
                                                 onChange={handleUpload}
                                             />
-                                            <span className="mr-2">📤</span> Carica una foto
+                                            <Upload className="w-5 h-5 mr-2" /> Carica una foto
                                         </label>
                                         <button
                                             type="button"
