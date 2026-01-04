@@ -3,10 +3,13 @@ export const UNIT_OPTIONS = [
     { value: 'kg', label: 'Chilogrammi (kg)' },
     { value: 'ml', label: 'Millilitri (ml)' },
     { value: 'l', label: 'Litri (l)' },
-    { value: 'tbsp', label: 'Cucchiai' },
-    { value: 'tsp', label: 'Cucchiaini' },
-    { value: 'pz', label: 'Pezzi' },
+    { value: 'cucchiaio', label: 'Cucchiaio' },
+    { value: 'cucchiaino', label: 'Cucchiaino' },
+    { value: 'uovo', label: 'Uovo/a' },
+    { value: 'pezzo', label: 'Pezzo' },
     { value: 'spicchio', label: 'Spicchio' },
     { value: 'metà', label: 'Metà' },
-    { value: 'q.b.', label: 'Quanto basta' }
+    { value: 'pizzico', label: 'Pizzico' },
+    { value: 'foglie', label: 'Foglie' },
+    { value: 'qb', label: 'Quanto basta (q.b.)' }
 ];
