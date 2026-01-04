@@ -485,6 +485,17 @@ export default function AddRecipe() {
                     </div>
                 </div>
 
+                {/* Variants and Tips */}
+                <div className="bg-[var(--bg-surface)] p-6 rounded-xl shadow-sm border border-gray-100 space-y-6">
+                    <h2 className="text-xl font-bold text-gray-800 border-b pb-2">Varianti e Consigli (Opzionale)</h2>
+                    <textarea
+                        value={recipe.variants_and_tips || ''}
+                        onChange={(e) => setRecipe({ ...recipe, variants_and_tips: e.target.value })}
+                        placeholder="Aggiungi suggerimenti, alternative per gli ingredienti o trucchi per la preparazione..."
+                        className="w-full px-4 py-3 rounded-xl border border-[var(--border-color)] focus:ring-2 focus:ring-primary focus:border-transparent transition-all min-h-[100px] bg-[var(--bg-surface)]"
+                    />
+                </div>
+
                 <div className="flex justify-end pt-4">
                     <button
                         type="submit"
