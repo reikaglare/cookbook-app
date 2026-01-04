@@ -34,6 +34,7 @@ export default function AddRecipe() {
         image_url: '',
         ingredients: [{ item: '', quantity: '', unit: '' }],
         instructions: [''],
+        variants_and_tips: '',
         nutrition: null as NutritionData | null,
     });
 

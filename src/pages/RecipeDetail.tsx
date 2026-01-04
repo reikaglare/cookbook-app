@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Clock, Users, ArrowLeft, Edit2, Trash2, Heart, Share2, ChefHat, Loader2, Calculator, ShoppingBag, RefreshCw } from 'lucide-react';
+import { Clock, Users, ArrowLeft, Edit2, Trash2, Heart, Share2, ChefHat, Loader2, Calculator, ShoppingBag, RefreshCw, Lightbulb } from 'lucide-react';
 import ShareModal from '../components/ShareModal';
 import CategoryIcon from '../components/CategoryIcon';
 import toast from 'react-hot-toast';
@@ -294,6 +294,16 @@ export default function RecipeDetail() {
                         <h3 className="font-bold text-orange-800 mb-2">Note dello Chef</h3>
                         <p className="text-orange-700 italic">{recipe.description || 'Nessuna descrizione.'}</p>
                     </div>
+
+                    {recipe.variants_and_tips && (
+                        <div className="bg-yellow-50 p-6 rounded-xl border border-yellow-100">
+                            <h3 className="font-bold text-yellow-800 mb-2 flex items-center">
+                                <Lightbulb className="w-5 h-5 mr-2" />
+                                Varianti e Consigli
+                            </h3>
+                            <p className="text-yellow-900 leading-relaxed whitespace-pre-line">{recipe.variants_and_tips}</p>
+                        </div>
+                    )}
                 </div>
             </div>
 
