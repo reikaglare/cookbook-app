@@ -9,7 +9,8 @@ import {
     Fish,
     Sandwich,
     Croissant,
-    Soup
+    Soup,
+    LayoutGrid
 } from 'lucide-react';
 
 interface CategoryIconProps {
@@ -24,6 +25,7 @@ export default function CategoryIcon({ name, className = "w-5 h-5", showDefault 
     const normalized = name.toLowerCase().trim();
 
     // Map categories to Lucide icons
+    if (normalized.includes('tutt') || normalized.includes('all')) return <LayoutGrid className={className} />;
     if (normalized.includes('antipast') || normalized.includes('starter')) return <Utensils className={className} />;
     if (normalized.includes('primi') || normalized.includes('pasta') || normalized.includes('zupp')) return <UtensilsCrossed className={className} />;
     if (normalized.includes('second') || normalized.includes('carne') || normalized.includes('main')) return <Drumstick className={className} />;
