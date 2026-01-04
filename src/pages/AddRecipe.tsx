@@ -7,19 +7,9 @@ import toast from 'react-hot-toast';
 import CategorySelect from '../components/CategorySelect';
 import type { NutritionData } from '../lib/nutrition';
 import { calculateNutrition } from '../lib/nutrition';
+import { UNIT_OPTIONS } from '../lib/constants';
 
-const UNIT_OPTIONS = [
-    { value: 'g', label: 'Grammi (g)' },
-    { value: 'kg', label: 'Kilogrammi (kg)' },
-    { value: 'ml', label: 'Millilitri (ml)' },
-    { value: 'l', label: 'Litri (l)' },
-    { value: 'cucchiaio', label: 'Cucchiaio' },
-    { value: 'cucchiaino', label: 'Cucchiaino' },
-    { value: 'uovo', label: 'Uovo/a' },
-    { value: 'pizzico', label: 'Pizzico' },
-    { value: 'qb', label: 'Quanto basta (q.b.)' },
-    { value: 'pezzo', label: 'Pezzo' },
-];
+
 
 export default function AddRecipe() {
     const { id } = useParams();

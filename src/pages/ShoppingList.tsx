@@ -12,19 +12,9 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import clsx from 'clsx';
+import { UNIT_OPTIONS } from '../lib/constants';
 
-const UNIT_OPTIONS = [
-    { value: 'g', label: 'Grammi (g)' },
-    { value: 'kg', label: 'Kilogrammi (kg)' },
-    { value: 'ml', label: 'Millilitri (ml)' },
-    { value: 'l', label: 'Litri (l)' },
-    { value: 'cucchiaio', label: 'Cucchiaio' },
-    { value: 'cucchiaino', label: 'Cucchiaino' },
-    { value: 'uovo', label: 'Uovo/a' },
-    { value: 'pizzico', label: 'Pizzico' },
-    { value: 'qb', label: 'Quanto basta (q.b.)' },
-    { value: 'pezzo', label: 'Pezzo' },
-];
+
 
 interface ShoppingItem {
     id: string;
