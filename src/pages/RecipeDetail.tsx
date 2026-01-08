@@ -8,6 +8,8 @@ import CategoryIcon from '../components/CategoryIcon';
 import toast from 'react-hot-toast';
 import { getSubstitutes, calculateNutrition, type SubstitutionGroup, type Substitute, type NutritionData } from '../lib/nutrition';
 
+const DISCRETE_UNITS = ['spicchio', 'pizzico', 'foglia', 'fogli', 'uovo', 'uova', 'goccia', 'gocce', 'costa', 'pezzo', 'pezzi'];
+
 export default function RecipeDetail() {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -216,9 +218,20 @@ export default function RecipeDetail() {
                                 const multiplier = displayServings / recipe.servings;
                                 const originalQty = parseFloat(ing.quantity);
 
+                                let calculatedQty = originalQty * multiplier * (currentSub ? currentSub.ratio : 1);
+
+                                // Check for discrete units to avoid fractions like 0.3 clove
+                                if (!isNaN(calculatedQty) && calculatedQty > 0 && calculatedQty < 1) {
+                                    const unit = (ing.unit || '').toLowerCase();
+                                    const isDiscrete = DISCRETE_UNITS.some(u => unit.includes(u));
+                                    if (isDiscrete) {
+                                        calculatedQty = 1;
+                                    }
+                                }
+
                                 const scaledQty = isNaN(originalQty)
                                     ? ing.quantity
-                                    : (originalQty * multiplier * (currentSub ? currentSub.ratio : 1)).toFixed(1).replace(/\.0$/, '');
+                                    : calculatedQty.toFixed(1).replace(/\.0$/, '');
 
                                 const displayItem = currentSub ? currentSub.name : ing.item;
 
