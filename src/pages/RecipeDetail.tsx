@@ -195,7 +195,7 @@ export default function RecipeDetail() {
             <div className="grid md:grid-cols-3 gap-8 px-2 md:px-0">
                 {/* Ingredients Column */}
                 <div className="md:col-span-1 space-y-6">
-                    <div className="bg-[var(--bg-surface)] p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div className="bg-[var(--bg-surface)] p-6 rounded-xl shadow-sm border border-[var(--border-color)]">
                         <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4 flex items-center">
                             <div className="bg-green-100 p-2 rounded-lg mr-2 text-green-600">
                                 <ChefHat className="w-5 h-5" />
@@ -223,7 +223,7 @@ export default function RecipeDetail() {
                                 const displayItem = currentSub ? currentSub.name : ing.item;
 
                                 return (
-                                    <li key={i} className="flex flex-col border-b last:border-0 border-gray-50 py-3">
+                                    <li key={i} className="flex flex-col border-b last:border-0 border-[var(--border-color)] py-3">
                                         <div className="flex items-start">
                                             <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />
                                             <div className="flex-1">
@@ -254,7 +254,7 @@ export default function RecipeDetail() {
                     </div>
 
                     {recipe.nutrition && (
-                        <div className="bg-[var(--bg-surface)] p-6 rounded-xl shadow-sm border border-gray-100">
+                        <div className="bg-[var(--bg-surface)] p-6 rounded-xl shadow-sm border border-[var(--border-color)]">
                             <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4 flex items-center">
                                 <div className="bg-orange-100 p-2 rounded-lg mr-2 text-orange-600">
                                     <Calculator className="w-5 h-5" />
@@ -262,31 +262,31 @@ export default function RecipeDetail() {
                                 Nutrizione
                             </h2>
                             <div className="space-y-4">
-                                <div className="flex justify-between items-center border-b border-gray-50 pb-2">
+                                <div className="flex justify-between items-center border-b border-[var(--border-color)] pb-2">
                                     <span className="text-[var(--text-secondary)] font-medium">Calorie</span>
                                     <span className="text-xl font-bold text-primary">{Math.round(currentNutrition?.calories || recipe.nutrition.calories)} kcal</span>
                                 </div>
                                 <div className="grid grid-cols-3 gap-2 text-center pt-2">
                                     {(currentNutrition?.totalNutrients.CHOCDF || recipe.nutrition.totalNutrients.CHOCDF) && (
-                                        <div className="bg-gray-50 p-2 rounded-lg">
+                                        <div className="bg-[var(--bg-hover)] p-2 rounded-lg">
                                             <div className="text-sm font-bold text-[var(--text-primary)]">{Math.round((currentNutrition || recipe.nutrition).totalNutrients.CHOCDF.quantity)}g</div>
                                             <div className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)]">Carbo</div>
                                         </div>
                                     )}
                                     {(currentNutrition?.totalNutrients.PROCNT || recipe.nutrition.totalNutrients.PROCNT) && (
-                                        <div className="bg-gray-50 p-2 rounded-lg">
+                                        <div className="bg-[var(--bg-hover)] p-2 rounded-lg">
                                             <div className="text-sm font-bold text-[var(--text-primary)]">{Math.round((currentNutrition || recipe.nutrition).totalNutrients.PROCNT.quantity)}g</div>
                                             <div className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)]">Proteine</div>
                                         </div>
                                     )}
                                     {(currentNutrition?.totalNutrients.FAT || recipe.nutrition.totalNutrients.FAT) && (
-                                        <div className="bg-gray-50 p-2 rounded-lg">
+                                        <div className="bg-[var(--bg-hover)] p-2 rounded-lg">
                                             <div className="text-sm font-bold text-[var(--text-primary)]">{Math.round((currentNutrition || recipe.nutrition).totalNutrients.FAT.quantity)}g</div>
                                             <div className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)]">Grassi</div>
                                         </div>
                                     )}
                                 </div>
-                                <div className="text-[10px] text-center text-[var(--text-secondary)] italic pt-2 border-t border-gray-50">
+                                <div className="text-[10px] text-center text-[var(--text-secondary)] italic pt-2 border-t border-[var(--border-color)]">
                                     Valori indicativi per l'intera ricetta
                                 </div>
                             </div>
@@ -296,7 +296,7 @@ export default function RecipeDetail() {
 
                 {/* Instructions Column */}
                 <div className="md:col-span-2 space-y-8">
-                    <div className="bg-[var(--bg-surface)] p-8 rounded-xl shadow-sm border border-gray-100">
+                    <div className="bg-[var(--bg-surface)] p-8 rounded-xl shadow-sm border border-[var(--border-color)]">
                         <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6">Procedimento</h2>
                         <div className="space-y-8">
                             {recipe.instructions?.map((step: string, i: number) => (
@@ -377,7 +377,7 @@ export default function RecipeDetail() {
                                 </button>
                             ))}
                         </div>
-                        <div className="p-4 bg-gray-50">
+                        <div className="p-4 bg-[var(--bg-hover)]">
                             <button
                                 onClick={() => setShowSubModal(null)}
                                 className="w-full py-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
