@@ -342,6 +342,13 @@ export default function AppLayout() {
                     <span className="text-[10px] mt-1 font-medium">Aggiungi</span>
                 </Link>
             </div>
+            {/* Timer FAB */}
+            <Link
+                to="/timer"
+                className="fixed bottom-20 md:bottom-10 right-4 md:right-10 bg-[var(--primary)] text-white p-4 rounded-full shadow-lg hover:bg-primary/90 transition-all z-50 hover:scale-110 active:scale-95 flex items-center justify-center border-4 border-[var(--bg-surface)]"
+            >
+                <Clock className="w-6 h-6" />
+            </Link>
         </div>
     );
 }

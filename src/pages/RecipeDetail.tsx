@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Clock, Users, ArrowLeft, Edit2, Trash2, Heart, Share2, ChefHat, Loader2, Calculator, ShoppingBag, RefreshCw, Lightbulb, Minus, Plus } from 'lucide-react';
+import { Clock, Users, ArrowLeft, Edit2, Trash2, Heart, Share2, ChefHat, Loader2, Calculator, ShoppingBag, RefreshCw, Lightbulb, Minus, Plus, Play } from 'lucide-react';
 import ShareModal from '../components/ShareModal';
 import CategoryIcon from '../components/CategoryIcon';
 import toast from 'react-hot-toast';
 import { getSubstitutes, calculateNutrition, type SubstitutionGroup, type Substitute, type NutritionData } from '../lib/nutrition';
+import { useTimer } from '../contexts/TimerContext';
 
 const DISCRETE_UNITS = ['spicchio', 'pizzico', 'foglia', 'fogli', 'uovo', 'uova', 'goccia', 'gocce', 'costa', 'pezzo', 'pezzi'];
 
@@ -21,6 +22,17 @@ export default function RecipeDetail() {
     const [currentNutrition, setCurrentNutrition] = useState<NutritionData | null>(null);
     const [showSubModal, setShowSubModal] = useState<{ index: number, group: SubstitutionGroup } | null>(null);
     const [displayServings, setDisplayServings] = useState<number>(0);
+    const { addTimer } = useTimer();
+
+    const startRecipeTimer = (type: 'prep' | 'cook') => {
+        if (!recipe) return;
+        const duration = type === 'prep' ? parseInt(recipe.prep_time) : parseInt(recipe.cook_time);
+        if (!duration || isNaN(duration) || duration <= 0) return;
+
+        const label = `${recipe.title} - ${type === 'prep' ? 'Preparazione' : 'Cottura'}`;
+        addTimer(label, duration);
+        toast.success(`Timer ${type === 'prep' ? 'preparazione' : 'cottura'} avviato!`);
+    };
 
     useEffect(() => {
         async function fetchRecipe() {
@@ -163,13 +175,15 @@ export default function RecipeDetail() {
                     <h1 className="text-3xl md:text-5xl font-bold mb-4">{recipe.title}</h1>
 
                     <div className="flex items-center space-x-8 text-sm md:text-base">
-                        <div className="flex items-center">
-                            <Clock className="w-5 h-5 mr-2" />
+                        <div className="flex items-center group cursor-pointer" onClick={() => startRecipeTimer('prep')}>
+                            <Clock className="w-5 h-5 mr-2 group-hover:text-[var(--primary)] transition-colors" />
                             <span>Prep: {recipe.prep_time}m</span>
+                            <Play className="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-[var(--primary)]" />
                         </div>
-                        <div className="flex items-center">
-                            <Clock className="w-5 h-5 mr-2" />
+                        <div className="flex items-center group cursor-pointer" onClick={() => startRecipeTimer('cook')}>
+                            <Clock className="w-5 h-5 mr-2 group-hover:text-[var(--primary)] transition-colors" />
                             <span>Cottura: {recipe.cook_time}m</span>
+                            <Play className="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-[var(--primary)]" />
                         </div>
                         <div className="flex items-center bg-white/20 backdrop-blur-md rounded-lg px-3 py-1 border border-white/30">
                             <Users className="w-5 h-5 mr-3" />
